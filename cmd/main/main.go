@@ -18,7 +18,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 func aboutMe(w http.ResponseWriter, r *http.Request) {
 	who := "CeliaSaumell"
 
-	fmt.Fprintf(w, "A little about Celia Saumell..")
+	fmt.Fprintf(w, "A little about meeeeeeeeeee..")
 	fmt.Println("endpoint hit ", who)
 
 }
