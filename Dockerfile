@@ -1,14 +1,20 @@
-FROM golang:latest
+##
+## Build
+##
 
-RUN mkdir /build
-WORKDIR /build
+FROM golang:alpine
 
-RUN export GO111MODULE=on
-RUN go install github.com/celiasaumell/GoWebAPI/main@latest
-RUN cd /build && git clone https://github.com/celiasaumell/GoWebAPI.git
+RUN mkdir -p /build/app/cmd/main
+WORKDIR /build/app/cmd/main 
 
-RUN cd /build/GoWebAPI/main && go build
+COPY ./app/cmd/main /build/app/cmd/main
+
+COPY ./app /build/app
+
+RUN cd /build/app/cmd/main && go build 
 
 EXPOSE 8080
 
-ENTRYPOINT [ "/build/GoWebAPI/main/main" ]
+CMD ["/bin/sh"]
+
+ENTRYPOINT ["/build/app/cmd/main/main"]
