@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/celiasaumell/GoWebAPI/pkg/config"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
@@ -21,7 +21,6 @@ func init() {
 }
 
 func (b *Book) CreateBook() *Book {
-	db.NewRecord(b)
 	db.Create(&b)
 	return b
 }
@@ -39,8 +38,8 @@ func GetBookById(Id int64) (*Book, *gorm.DB) {
 	return &getBook, db
 }
 
-func DeleteBook(ID int64) Book {
+func DeleteBook(ID int64) *Book {
 	var book Book
-	db.Where("ID=?", ID).Delete(book)
-	return book
+	db.Where("ID=?", ID).Delete(&book)
+	return &book
 }

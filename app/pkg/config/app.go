@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gorm.io/driver/sqlserver"
+	"gorm.io/gorm"
 )
 
 var (
@@ -10,7 +10,8 @@ var (
 )
 
 func Connect() {
-	d, err := gorm.Open("mysql", "totoro:runescape2/mydb?charset=utf8&parseTime=True&loc=Local")
+	dsn := "sqlserver://login:password@localhost:1433?database=Test"
+	d, err := gorm.Open(sqlserver.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic(err)
